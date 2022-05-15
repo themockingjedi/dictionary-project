@@ -3,13 +3,13 @@ import axios from "axios";
 import Results from "./Results";
 import "./Dictionary.css";
 
-export default function Dictionary() {
+export default function Dictionary(props) {
   const [keyword, setKeyword] = useState(" ");
   const [result, setResult] = useState(null);
+  const [loaded, setLoaded] = useState(false);
 
   function findDef(response) {
-    console.log(response.data);
-    setResult(response.data[0]);
+    setResult(response.props.data[0]);
   }
 
   function search(event) {
@@ -23,18 +23,27 @@ export default function Dictionary() {
     setKeyword(event.target.value);
   }
 
-  return (
-    <div className="Dictionary">
-      <section className="submit-word">
-        <form onSubmit={search} className="form-control-lg">
-          <input
-            type="search"
-            onChange={keywordUpdate}
-            placeholder="Define a word"
-          />
-        </form>
-      </section>
-      <Results results={result} />
-    </div>
-  );
+  function load() {
+    setLoaded(true);
+    findDef();
+  }
+  if (loaded) {
+    return (
+      <div className="Dictionary">
+        <section className="submit-word">
+          <form onSubmit={search} className="form-control-lg">
+            <input
+              type="search"
+              defaultValue={props.defaultWord}
+              onChange={keywordUpdate}
+              placeholder="Define a word"
+            />
+          </form>
+        </section>
+        <Results results={result} />
+      </div>
+    );
+  } else {
+    load();
+  }
 }
