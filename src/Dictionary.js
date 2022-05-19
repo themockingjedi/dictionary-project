@@ -48,6 +48,7 @@ export default function Dictionary(props) {
     return (
       <div className="Dictionary">
         <section className="submit-word">
+          <h2>What would you like to look up?</h2>
           <form onSubmit={handleSubmit} className="form-control-lg">
             <input
               type="search"
@@ -56,6 +57,7 @@ export default function Dictionary(props) {
               placeholder="Define a word"
             />
           </form>
+          <p>i.e. book, mask, phone, console, etc.</p>
         </section>
         <Results results={result} />
         <Photos photos={photos} />

@@ -8,7 +8,7 @@ export default function Results(props) {
   console.log(props.results);
   if (props.results) {
     return (
-      <div className="Results">
+      <div className="Results bottom-spacer">
         <section className="word">
           <h2>{props.results.word}</h2>
           {props.results.phonetics.map(function (phonetic, index) {
@@ -22,7 +22,7 @@ export default function Results(props) {
         <section className="meanings">
           {props.results.meanings.map(function (meaning, index) {
             return (
-              <section key={index}>
+              <section className="part-speech" key={index}>
                 <Meaning meaning={meaning} />
               </section>
             );
